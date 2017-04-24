@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'ec2-52-57-83-40.eu-central-1.compute.amazonaws.com',
-    'eglit.bitnamiapp.com',
+    u'eglit.bitnamiapp.com'
 ]
 
 
@@ -42,7 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # For currency field support
-    'django-moneyfield,'
+    'djmoney_rates',
+    'djmoney',
+
+
+    # E-Global apps
+    'banking',
+
+    # REST support
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +69,7 @@ ROOT_URLCONF = 'Project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,3 +145,40 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/Project/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+##########################################
+# Custom settings
+##########################################
+
+# djmoney
+CURRENCIES = (
+    'USD',
+    'EUR',
+    'GBP',
+    'CHF',
+)
+LOGIN_REDIRECT_URL = 'banking/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
+AUTO_CONVERT_MONEY = True
+
+DJANGO_MONEY_RATES = {
+    'DEFAULT_BACKEND': 'djmoney_rates.backends.FixerIOBackend',
+    'URL': 'http://api.fixer.io/latest',
+    'BASE_CURRENCY': 'EUR',
+}
+
+
+# REST configuration
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ]
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'EXCEPTION_HANDLER': 'banking.utils.custom_exception_handler'
+}

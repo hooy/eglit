@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}New Transfer{% endblock %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        <input type="submit" value="Pay" />
+    </form>
+{% endblock %}
