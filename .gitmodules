@@ -1,0 +1,6 @@
+[submodule "django-money-rates"]
+	path = django-money-rates
+	url = git://github.com:evonove/django-money-rates.git
+[submodule "django-money"]
+	path = django-money
+	url = git://github.com:django-money/django-money.git
