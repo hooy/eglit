@@ -13,15 +13,11 @@ API (please ignore HTML forms -- still need to finish them, use JSON format only
 
 http://eglit.bitnamiapp.com/
 
-For DB reference check dbexport.pgsql
+For DB reference check [dbexport](dbexport.pgsql)
 
 USERS:
-admin
 
-qUiLoRYt
+admin/qUiLoRYt
 
-
-test_user
-
-EnToNcHu
+test_user/EnToNcHu
 
