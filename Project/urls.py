@@ -19,7 +19,8 @@ from django.contrib.auth import views as auth_views
 from rest_framework.authtoken import views
 from banking.views import AccountViewSet, TransactionViewSet
 from rest_framework import routers
-
+from django.conf.urls.static import static
+import settings
 
 router = routers.DefaultRouter()
 router.register(r'accounts', AccountViewSet)
@@ -37,4 +38,6 @@ urlpatterns = [
         include('rest_framework.urls', namespace='rest_framework')
     ),
     url(r'^api-token-auth/', views.obtain_auth_token)
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
